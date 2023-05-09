@@ -1,6 +1,6 @@
 # Q UI
 
-A React interface to the [Space Traders API](https://spacetraders.io/). Work in progress.
+Q UI is a React interface to the [Space Traders API](https://spacetraders.io/) by Michanations\#1000 on Discord. Work in progress.
 
 ## Getting Started
 
