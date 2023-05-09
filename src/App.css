@@ -42,3 +42,7 @@
 .system-viewer .list-item:hover {
   background-color: #c88afa;
 }
+
+.active {
+  background-color: #7cbaf8;
+}
