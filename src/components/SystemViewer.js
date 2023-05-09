@@ -40,10 +40,13 @@ function SystemViewer({ systems }) {
       return null;
     }
     return (
-      <WaypointList
-        waypoints={selectedSystem.waypoints}
-        onWaypointSelect={handleWaypointSelect}
-      />
+      <>
+        <h2>{selectedSystem.symbol}</h2>
+        <WaypointList
+          waypoints={selectedSystem.waypoints}
+          onWaypointSelect={handleWaypointSelect}
+        />
+      </>
     );
   };
 
