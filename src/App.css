@@ -46,3 +46,11 @@
 .active {
   background-color: #7cbaf8;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.normal {
+  font-weight: normal;
+}
