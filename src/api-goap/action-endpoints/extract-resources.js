@@ -19,7 +19,8 @@ function createSurvey(shipSymbol, survey = null) {
       cargo: {
         isFull: false,
       }
-    }
+    },
+    70,
   );
 }
 

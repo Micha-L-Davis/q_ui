@@ -19,7 +19,8 @@ function createSurvey(shipSymbol) {
         },
         status: 'IN_ORBIT'
       },
-    }
+    },
+    70,
   );
 }
 

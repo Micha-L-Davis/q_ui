@@ -37,13 +37,14 @@ class Action {
 }
 
 class ActionEndpoint {
-  constructor(name, method, apiEndpoint, headers, body, hardPreconditions) {
+  constructor(name, method, apiEndpoint, headers, body, hardPreconditions, coolDown = 0) {
     this.name = name;
     this.method = method;
     this.apiEndpoint = apiEndpoint;
     this.headers = headers;
     this.body = body;
     this.hardPreconditions = hardPreconditions;
+    this.coolDown = coolDown;
   }
 }
 
@@ -66,7 +67,7 @@ class Planner {
       }
 
       for (let action of this.actions) {
-        if (this.stateSatisfies(node.state, action.preconditions)) {
+        if (this.stateSatisfies(node.state, action.preconditions) && action.coolDown === 0) {
           let newState = await action.execute(node.state);
           let newActions = node.actions.concat(action);
           let newCost = node.cost + action.cost;
