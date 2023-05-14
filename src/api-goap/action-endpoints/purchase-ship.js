@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const purchaseShip = (shipType, waypointSymbol, cost) => {
+function purchaseShip(shipType, waypointSymbol, cost) {
   new ActionEndpoint(
     'Purchase Ship',
     'POST',
@@ -16,6 +16,6 @@ const purchaseShip = (shipType, waypointSymbol, cost) => {
       credits: cost,
     }
   );
-};
+}
 
 export default purchaseShip;

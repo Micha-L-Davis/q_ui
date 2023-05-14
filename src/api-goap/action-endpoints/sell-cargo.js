@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const sellCargo = (shipSymbol, resourceSymbol, units) => {
+function sellCargo(shipSymbol, resourceSymbol, units) {
   new ActionEndpoint(
     'Sell Cargo',
     'POST',
@@ -21,6 +21,6 @@ const sellCargo = (shipSymbol, resourceSymbol, units) => {
       }
     }
   );
-};
+}
 
 export default sellCargo;

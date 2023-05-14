@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const orbitShip = (shipSymbol) => {
+function orbitShip(shipSymbol) {
   new ActionEndpoint(
     'Orbit Ship',
     'POST',
@@ -13,8 +13,8 @@ const orbitShip = (shipSymbol) => {
       nav: {
         status: 'DOCKED'
       },
-    },
+    }
   );
-};
+}
 
 export default orbitShip;

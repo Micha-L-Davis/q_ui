@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const dockShip = (shipSymbol) => {
+function dockShip(shipSymbol) {
   new ActionEndpoint(
     'Dock Ship',
     'POST',
@@ -13,8 +13,8 @@ const dockShip = (shipSymbol) => {
       nav: {
         status: 'IN_ORBIT'
       },
-    },
+    }
   );
-};
+}
 
 export default dockShip;

@@ -128,4 +128,4 @@ const ApiGoap = {
   mergeState
 };
 
-module.exports = ApiGoap;
+export default ApiGoap;

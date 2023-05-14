@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const refuelShip = (shipSymbol) => {
+function refuelShip(shipSymbol) {
   new ActionEndpoint(
     'Refuel Ship',
     'POST',
@@ -15,6 +15,6 @@ const refuelShip = (shipSymbol) => {
       },
     }
   );
-};
+}
 
 export default refuelShip;

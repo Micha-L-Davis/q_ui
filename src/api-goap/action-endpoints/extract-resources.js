@@ -1,8 +1,8 @@
-import { ActionEndpoint } from '../index.js';
+import ActionEndpoint from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const createSurvey = (shipSymbol, survey = null) => {
+function createSurvey(shipSymbol, survey = null) {
   new ActionEndpoint(
     'Create Survey',
     'POST',
@@ -19,8 +19,8 @@ const createSurvey = (shipSymbol, survey = null) => {
       cargo: {
         isFull: false,
       }
-    },
+    }
   );
-};
+}
 
 export default createSurvey;

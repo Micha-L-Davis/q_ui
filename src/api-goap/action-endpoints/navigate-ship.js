@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const createSurvey = (shipSymbol, waypointSymbol) => {
+function createSurvey(shipSymbol, waypointSymbol) {
   new ActionEndpoint(
     'Create Survey',
     'POST',
@@ -17,6 +17,6 @@ const createSurvey = (shipSymbol, waypointSymbol) => {
       }
     }
   );
-};
+}
 
 export default createSurvey;
