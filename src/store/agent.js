@@ -1,21 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getMyAgent } from '../api-goap/information-endpoints';
 
 const initialState = {
-  ships: getAgent(),
+  ships: getMyAgent(),
 };
-
-const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
-
-async function getAgent() {
-  const response = await fetch('https://api.spacetraders.io/v2/my/agent', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
-    },
-  });
-  const data = await response.json();
-  return data.data;
-}
 
 const agentSlice = createSlice({
   name: 'agent',

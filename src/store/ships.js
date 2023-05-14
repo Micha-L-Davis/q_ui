@@ -1,21 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getShips } from '../api-goap/information-endpoints';
 
 const initialState = {
   ships: getShips(),
 };
-
-const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
-
-async function getShips() {
-  const response = await fetch('https://api.spacetraders.io/v2/my/ships', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${API_TOKEN}`,
-    },
-  });
-  const data = await response.json();
-  return data.data;
-}
 
 const shipsSlice = createSlice({
   name: 'ships',
@@ -23,6 +11,9 @@ const shipsSlice = createSlice({
   reducers: {
     addShip(state, action) {
       state.ships.push(action.payload);
+    },
+    updateShips(state, action) {
+      state.ships = action.payload;
     },
     updateNav(state, action) {
       const ship = state.ships.find(ship => ship.symbol === action.payload.symbol);
@@ -35,6 +26,10 @@ const shipsSlice = createSlice({
     updateCargo(state, action) {
       const ship = state.ships.find(ship => ship.symbol === action.payload.symbol);
       ship.cargo = action.payload.cargo;
+    },
+    updateCoolDown(state, action) {
+      const ship = state.ships.find(ship => ship.symbol === action.payload.symbol);
+      ship.coolDown = action.payload.coolDown;
     },
   },
 });
