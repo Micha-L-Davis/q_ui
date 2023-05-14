@@ -16,6 +16,9 @@ const sellCargo = (shipSymbol, resourceSymbol, units) => {
       nav: {
         status: 'DOCKED',
       },
+      cargo: {
+        empty: false,
+      }
     }
   );
 };

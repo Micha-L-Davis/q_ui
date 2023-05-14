@@ -2,7 +2,7 @@ import { ActionEndpoint } from '../index.js';
 
 const API_TOKEN = process.env.REACT_APP_SPACETRADERS_TOKEN;
 
-const purchaseShip = (shipType, waypointSymbol) => {
+const purchaseShip = (shipType, waypointSymbol, cost) => {
   new ActionEndpoint(
     'Purchase Ship',
     'POST',
@@ -12,7 +12,9 @@ const purchaseShip = (shipType, waypointSymbol) => {
       shipType: `${shipType}`,
       waypointSymbol: `${waypointSymbol}`
     },
-    //prerequiste state
+    {
+      credits: cost,
+    }
   );
 };
 

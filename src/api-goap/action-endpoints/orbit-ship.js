@@ -9,7 +9,11 @@ const orbitShip = (shipSymbol) => {
     `https://api.spacetraders.io/v2/my/ships/${shipSymbol}/orbit`,
     [`Authorization: Bearer ${API_TOKEN}`],
     null,
-    //prerequiste state
+    {
+      nav: {
+        status: 'DOCKED'
+      },
+    },
   );
 };
 

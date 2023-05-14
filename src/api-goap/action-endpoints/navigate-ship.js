@@ -11,7 +11,11 @@ const createSurvey = (shipSymbol, waypointSymbol) => {
     {
       waypointSymbol: `${waypointSymbol}`
     },
-    //prerequiste state
+    {
+      fuel: {
+        overTravelThreshold: true,
+      }
+    }
   );
 };
 

@@ -9,7 +9,17 @@ const createSurvey = (shipSymbol, survey = null) => {
     `https://api.spacetraders.io/v2/my/ships/${shipSymbol}/extract`,
     [`Authorization: Bearer ${API_TOKEN}`],
     survey,
-    //prerequiste state
+    {
+      nav: {
+        system: {
+          type: 'ASTEROID_BELT',
+        },
+        status: 'IN_ORBIT'
+      },
+      cargo: {
+        isFull: false,
+      }
+    },
   );
 };
 

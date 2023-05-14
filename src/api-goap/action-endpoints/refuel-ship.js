@@ -9,7 +9,11 @@ const refuelShip = (shipSymbol) => {
     `https://api.spacetraders.io/v2/my/ships/${shipSymbol}/survey`,
     [`Authorization: Bearer ${API_TOKEN}`],
     null,
-    //prerequiste state
+    {
+      fuel: {
+        full: false,
+      },
+    }
   );
 };
 
