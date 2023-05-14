@@ -1,9 +1,10 @@
 class Action {
-  constructor(method, apiEndpoint, headers, body, preconditions, cost) {
-    this.apiEndpoint = apiEndpoint;
+  constructor(actionEndpoint, preconditions, cost) {
+    this.apiEndpoint = actionEndpoint.apiEndpoint;
     this.preconditions = preconditions;
-    this.method = method;
-    this.headers = headers;
+    this.method = actionEndpoint.method;
+    this.headers = actionEndpoint.headers;
+    this.body = actionEndpoint.body;
     this.cost = cost;
   }
 
@@ -29,6 +30,17 @@ class Action {
   }
 
 }
+
+class ActionEndpoint {
+  constructor(name, method, apiEndpoint, headers, body) {
+    this.name = name;
+    this.method = method;
+    this.apiEndpoint = apiEndpoint;
+    this.headers = headers;
+    this.body = body;
+  }
+}
+
 
 class Planner {
   constructor(actions) {
@@ -83,6 +95,7 @@ class Planner {
 
 const ApiGoap = {
   Action,
+  ActionEndpoint,
   Planner
 };
 
