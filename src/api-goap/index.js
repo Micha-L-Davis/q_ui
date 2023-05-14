@@ -1,3 +1,7 @@
+import RateLimiter from "./rate-limiter";
+
+const enqueueRequest = new RateLimiter().enqueueRequest;
+
 class Action {
   constructor(actionEndpoint, preconditions, cost) {
     this.apiEndpoint = actionEndpoint.apiEndpoint;
@@ -17,12 +21,14 @@ class Action {
   }
 
   async execute(currentState) {
-    const response = await fetch(this.apiEndpoint, {
-      method: this.method,
-      headers: this.headers,
-      body: this.body
-    });
-
+    const response = enqueueRequest({
+      url: this.apiEndpoint,
+      parameters: {
+        method: this.method,
+        headers: this.headers,
+        body: this.body
+      }
+    })
 
     const responseState = await response.json();
     const newState = this.applyAction(currentState, responseState);
