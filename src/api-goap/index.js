@@ -1,11 +1,19 @@
 class Action {
   constructor(actionEndpoint, preconditions, cost) {
     this.apiEndpoint = actionEndpoint.apiEndpoint;
-    this.preconditions = preconditions;
+    this.preconditions = this.setPreconditions(actionEndpoint.hardPreconditions, preconditions);
     this.method = actionEndpoint.method;
     this.headers = actionEndpoint.headers;
     this.body = actionEndpoint.body;
     this.cost = cost;
+  }
+
+  setPreconditions(hardPreconditions, preconditions) {
+    return mergeState(hardPreconditions, preconditions, false);
+  }
+
+  applyAction(state, effects) {
+    return mergeState(state, effects);
   }
 
   async execute(currentState) {
@@ -20,24 +28,16 @@ class Action {
     const newState = this.applyAction(currentState, responseState);
     return newState;
   }
-
-  applyAction(state, effects) {
-    let newState = Object.assign({}, state);
-    for (let key in effects) {
-      newState[key] = effects[key];
-    }
-    return newState;
-  }
-
 }
 
 class ActionEndpoint {
-  constructor(name, method, apiEndpoint, headers, body) {
+  constructor(name, method, apiEndpoint, headers, body, hardPreconditions) {
     this.name = name;
     this.method = method;
     this.apiEndpoint = apiEndpoint;
     this.headers = headers;
     this.body = body;
+    this.hardPreconditions = hardPreconditions;
   }
 }
 
@@ -93,10 +93,39 @@ class Planner {
   }
 }
 
+function mergeState(state1, state2, overwrite = true) {
+  let newState = { ...state1 };
+
+  for (let key in state2) {
+    switch (typeof state2[key]) {
+      case 'object': //recurse into object keys
+        if (typeof newState[key] === 'object') {
+          newState[key] = mergeState(newState[key], state2[key], overwrite);
+        }
+        break;
+      case 'number':
+        if (overwrite) { newState[key] = state2[key]; }
+        else if (!(key in newState) || state2[key] > newState[key]) { //assume a greater value represents a more strict requirement
+          newState[key] = state2[key];
+        }
+        break;
+      default: //assume initial state supersedes, unless overwrite is true
+        if (overwrite) { newState[key] = state2[key]; }
+        else if (!(key in newState)) {
+          newState[key] = state2[key];
+        }
+        break;
+    }
+  }
+
+  return newState;
+}
+
 const ApiGoap = {
   Action,
   ActionEndpoint,
-  Planner
+  Planner,
+  mergeState
 };
 
-export default ApiGoap;
+module.exports = ApiGoap;
