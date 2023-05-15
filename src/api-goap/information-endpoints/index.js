@@ -8,7 +8,7 @@ export async function getMyAgent() {
     },
   });
   const data = await response.json();
-  return data.data;
+  return data;
 }
 
 export async function getShips() {
@@ -19,7 +19,7 @@ export async function getShips() {
     },
   });
   const data = await response.json();
-  return data.data;
+  return data;
 }
 
 const getters = {
