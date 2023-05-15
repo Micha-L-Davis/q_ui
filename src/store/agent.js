@@ -10,7 +10,7 @@ const agentSlice = createSlice({
   initialState,
   reducers: {
     updateCredits(state, action) {
-      state.agent.credits = action.payload.credits;
+      state.agent.data.credits = action.payload.credits;
     }
   },
 });
