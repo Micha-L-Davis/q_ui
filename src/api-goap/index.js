@@ -67,12 +67,11 @@ class Planner {
       }
 
       for (let action of this.actions) {
-        if (this.stateSatisfies(node.state, action.preconditions) && action.coolDown === 0) {
-          let newState = await action.execute(node.state);
+        if (this.actionSatisfies(node.state, action, goal) && action.coolDown === 0) {
           let newActions = node.actions.concat(action);
           let newCost = node.cost + action.cost;
 
-          openSet.push({ state: newState, actions: newActions, cost: newCost });
+          openSet.push({ state: node.state, actions: newActions, cost: newCost });
         }
       }
 
@@ -90,16 +89,34 @@ class Planner {
     return true;
   }
 
-  stateSatisfies(state, preconditions) {
-    for (let key in preconditions) {
-      if (state[key] !== preconditions[key]) {
+  actionSatisfies(state, action, goal) {
+    let responseSchema = this.getResponseSchema(action);
+    let newState = this.simulateAction(state, action);
+
+    for (let key in goal) {
+      if (responseSchema[key] && newState[key] !== goal[key]) {
         return false;
       }
     }
+
     return true;
+  }
+
+  getResponseSchema(action) {
+    // retrieve the schema of the response object for the given action
+    // (define a separate schema property for each action)
+
+    // return the response schema object
+  }
+
+  simulateAction(state, action) {
+    // simulate the action's effects on the state without actually executing it
+
+    // return the new state after applying the action's effects
   }
 }
 
+//this should be refactored to use redux store reducers to merge state
 function mergeState(state1, state2, overwrite = true) {
   let newState = { ...state1 };
 
